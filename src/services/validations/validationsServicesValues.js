@@ -1,6 +1,6 @@
 const { idSchema, insertProductSchema } = require('./schemas');
 
-const validateId = (id) => {
+const validateProductId = (id) => {
   const { error } = idSchema.validate(id);
   if (error) return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
 
@@ -18,6 +18,6 @@ const validateNewProduct = (name) => {
 };
 
 module.exports = {
-  validateId,
+  validateProductId,
   validateNewProduct,
 };
