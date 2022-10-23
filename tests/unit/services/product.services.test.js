@@ -22,6 +22,14 @@ describe("Verificando camada service de produtos", function () {
     expect(result.message).to.equal("Product not found");
   });
 
+  it("retorna um erro caso seja o campo name não seja preenchido", async function () {
+    const result = await productService.insertProductService(undefined);
+
+    expect(result.type).to.equal("FIELD_IS_REQUIRED");
+
+    expect(result.message).to.equal('"name" is required');
+  });
+  
   it("retorna um erro caso seja passado um nome inválido", async function () {
     const result = await productService.insertProductService('mar');
     const resultTwo = await productService.insertProductService(123);
