@@ -28,8 +28,22 @@ const insertProductService = async (name) => {
   return { type: null, message: newProduct };
 };
 
+const deleteProductService = async (productId) => {
+  const error = await validateProductId(productId);
+  if (error.type) return error;
+  
+ const deleteProduct = await productModel.deleteProductModel(productId);
+  if (deleteProduct.affectedRows) return { type: null, message: null };
+  if (!deleteProduct.affectedRows) {
+ return {
+    type: 'PRODUCT_NOT_FOUND', message: 'Product not found',
+  }; 
+}
+};
+
 module.exports = {
   productServiceGetAll,
   productServiceGetById,
   insertProductService,
+  deleteProductService,
 };
