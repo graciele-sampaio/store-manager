@@ -28,7 +28,7 @@ const insertProductService = async (name) => {
   return { type: null, message: newProduct };
 };
 
-const updateProductService = async (productId) => {
+const updateProductService = async (productId, name) => {
   const error = validateProductId(productId);
   if (error.type) return error;
 
