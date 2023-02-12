@@ -28,6 +28,19 @@ const insertProductService = async (name) => {
   return { type: null, message: newProduct };
 };
 
+const updateProductService = async (productId) => {
+  const error = validateProductId(productId);
+  if (error.type) return error;
+
+    const errorTwo = validateNewProduct(name);
+  if (errorTwo.type) return errorTwo;
+
+  await productModel.updateProductModel(productId, name);
+  const productGetById = await productModel.productModelGetById(productId);
+
+  return { type: null, message: productGetById };
+};
+
 const deleteProductService = async (productId) => {
   const error = await validateProductId(productId);
   if (error.type) return error;
@@ -45,5 +58,6 @@ module.exports = {
   productServiceGetAll,
   productServiceGetById,
   insertProductService,
+  updateProductService,
   deleteProductService,
 };
